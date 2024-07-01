@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/ten-stack-query-app/static/css/main.31d6cfe0.css",
+    "main.js": "/ten-stack-query-app/static/js/main.a4a4bdc1.js",
+    "static/js/453.f2c4c2d7.chunk.js": "/ten-stack-query-app/static/js/453.f2c4c2d7.chunk.js",
+    "index.html": "/ten-stack-query-app/index.html",
+    "main.a4a4bdc1.js.map": "/ten-stack-query-app/static/js/main.a4a4bdc1.js.map",
+    "453.f2c4c2d7.chunk.js.map": "/ten-stack-query-app/static/js/453.f2c4c2d7.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.31d6cfe0.css",
+    "static/js/main.a4a4bdc1.js"
+  ]
+}
