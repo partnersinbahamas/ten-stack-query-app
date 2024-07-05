@@ -1,6 +1,6 @@
 export const BASE_URL="https://jsonplaceholder.typicode.com";
 
-function request(url: string, method: TAPIMethod, data?: any) {
+function request<T>(url: string, method: TAPIMethod, data?: any): Promise<T> {
   const options: IAPIOptions = {
     method,
     headers: {
@@ -22,7 +22,7 @@ function request(url: string, method: TAPIMethod, data?: any) {
     .catch(error => console.log(error))
 }
 
-export const get = async(url: string) => await request(url, 'GET');
-export const post = async(url: string, data: any) => await request(url, 'POST', data);
-export const put = async(url: string, data: any) => await request(url, 'PUT', data);
-export const remove = async(url: string) => await request(url, 'DELETE');
+export const get = async<T>(url: string) => await request<T>(url, 'GET');
+export const post = async<T>(url: string, data: any) => await request<T>(url, 'POST', data);
+export const put = async<T>(url: string, data: any) => await request<T>(url, 'PUT', data);
+export const remove = async<T>(url: string) => await request<T>(url, 'DELETE');
