@@ -1,28 +1,41 @@
-import { useQuery } from '@tanstack/react-query';
-import './App.module.scss';
-import { spawn } from 'child_process';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
-const BASE_URL="https://jsonplaceholder.typicode.com";
+import UsersService from './services/users.service';
+import { Users } from './components/Users/Users';
+
+import './App.module.scss';
+import { useEffect, useState } from 'react';
+import useGetUsers from './hooks/useGetUsers';
 
 function App() {
-  const { isLoading, data } = useQuery({
-    queryKey: ['coins'],
-    queryFn: () => fetch(`${BASE_URL}/todos`).then(response => response.json()),
+  const queryClient = useQueryClient();
+  const [userId, setUserId] = useState<TID | null>(null);
+
+  const { isLoading: usersLoad, data: users = [] } = useGetUsers();
+
+  const { data: user } = useQuery({
+    queryKey: ['user'],
+    queryFn: () => UsersService.getUser(userId || 0),
+    enabled: !!userId,
   });
 
-  if (isLoading) return <span>loading...</span>;
+  console.log(user);
+
+  if (usersLoad) return <span>loading...</span>;
+
+
+  const handleUser = (id: TID) => {
+    setUserId(id);
+    queryClient.invalidateQueries({ queryKey: ['users'] });
+    queryClient.invalidateQueries({ queryKey: ['user'] });
+  };
 
   return (
     <section>
       <h1>Tan Stack Query</h1>
-
-      <ul>
-        {data.map((item: ITodo) => (
-          <li key={item.id}>
-            <span>{item.title}:</span>
-          </li>
-        ))}
-      </ul>
+      <main>
+        <Users users={users} onUserSelect={handleUser} />
+      </main>
     </section>
   );
 }
