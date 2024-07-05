@@ -1,0 +1,17 @@
+.users {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 30%;
+}
+
+.user {
+  background-color: #52682E;
+  padding: 0.25rem
+}
