@@ -4,7 +4,7 @@ import UsersService from './services/users.service';
 import { Users } from './components/Users/Users';
 
 import './App.module.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useGetUsers from './hooks/useGetUsers';
 
 function App() {
@@ -19,10 +19,7 @@ function App() {
     enabled: !!userId,
   });
 
-  console.log(user);
-
   if (usersLoad) return <span>loading...</span>;
-
 
   const handleUser = (id: TID) => {
     setUserId(id);
