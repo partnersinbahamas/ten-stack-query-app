@@ -1,23 +1,18 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 
-import UsersService from './services/users.service';
 import { Users } from './components/Users/Users';
+import useGetUsers from './hooks/useGetUsers';
+import useUser from './hooks/useUser';
 
 import './App.module.scss';
-import { useState } from 'react';
-import useGetUsers from './hooks/useGetUsers';
 
 function App() {
   const queryClient = useQueryClient();
   const [userId, setUserId] = useState<TID | null>(null);
 
   const { isLoading: usersLoad, data: users = [] } = useGetUsers();
-
-  const { data: user } = useQuery({
-    queryKey: ['user'],
-    queryFn: () => UsersService.getUser(userId || 0),
-    enabled: !!userId,
-  });
+  const { data: user } = useUser(userId || 0);
 
   if (usersLoad) return <span>loading...</span>;
 
