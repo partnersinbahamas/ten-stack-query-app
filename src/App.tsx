@@ -5,7 +5,8 @@ import { Users } from './components/Users/Users';
 import useGetUsers from './hooks/useGetUsers';
 import useUser from './hooks/useUser';
 
-import './App.module.scss';
+import styles from './App.module.scss';
+import Todos from './components/Todos/Todos';
 
 function App() {
   const queryClient = useQueryClient();
@@ -25,8 +26,9 @@ function App() {
   return (
     <section>
       <h1>Tan Stack Query</h1>
-      <main>
+      <main className={styles.main}>
         <Users users={users} onUserSelect={handleUser} />
+        <Todos />
       </main>
     </section>
   );
