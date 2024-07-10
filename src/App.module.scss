@@ -1,5 +1,26 @@
+
+.header {
+  background-color: #35431e;
+  padding: 1rem;
+
+  display: flex;
+  gap: 0.5rem;
+
+  .title {
+    margin: 0;
+  }
+
+  .revalidate {
+    border: 0;
+    background-color: orangered;
+    color: #fff;
+    font-weight: 500;
+  }
+}
+
 .main {
   display: flex;
   gap: 10rem;
+  padding: 1rem;
   align-items: flex-start;
 }
