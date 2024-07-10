@@ -44,5 +44,5 @@ interface IUser {
   website: string;
   company: IUserCompany;
 }
-  
-  
+
+interface ICreateUser extends Omit<IUser, 'id'> {};
