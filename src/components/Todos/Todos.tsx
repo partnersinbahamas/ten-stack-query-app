@@ -10,10 +10,7 @@ const Todos = () => {
     <section>
       <h4 className={styles.title}>Todos: </h4>
 
-      <button
-        className={styles.button}
-        onClick={() => setFetchTodos((current) => !current)}
-      >
+      <button onClick={() => setFetchTodos((current) => !current)}>
         Fetch: {fetchTodos ? 'true' : 'false'}
       </button>
 
