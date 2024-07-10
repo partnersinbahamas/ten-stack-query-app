@@ -17,7 +17,7 @@ const Todos = () => {
         Fetch: {fetchTodos ? 'true' : 'false'}
       </button>
 
-      <ul>
+      <ul className={styles.todos}>
         {todos?.map((todo) => (
           <li>{todo.title}</li>
         ))}
