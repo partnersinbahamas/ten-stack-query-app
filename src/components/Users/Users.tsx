@@ -1,3 +1,4 @@
+import User from './User/User';
 import styles from './Users.module.scss';
 
 type TProps = {
@@ -8,8 +9,8 @@ type TProps = {
 export const Users: React.FC<TProps> = ({ users, onUserSelect }) => (
   <ul className={styles.users}>
     {users.map((user: IUser) => (
-      <li key={user.id} className={styles.user} onClick={() => onUserSelect(user.id)}>
-        <span>{user.name}</span>
+      <li key={user.id}  onClick={() => onUserSelect(user.id)}>
+        <User user={user} />
       </li>
     ))}
   </ul>
