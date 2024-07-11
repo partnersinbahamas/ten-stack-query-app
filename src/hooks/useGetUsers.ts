@@ -31,6 +31,7 @@ const useGetUsers = () => useQuery({
   queryKey: ['users'],
   queryFn: () => usersService.getAll(),
   initialData: () => initialUserData,
+  staleTime: 100, // amount of time when data will be aktual considered in ms
 });
 
 export default useGetUsers;
