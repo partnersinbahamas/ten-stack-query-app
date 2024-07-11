@@ -1,5 +1,5 @@
 import { SyntheticEvent, useState } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useIsFetching, useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { Users } from './components/Users/Users';
 import useGetUsers from './hooks/useGetUsers';
@@ -15,8 +15,11 @@ function App() {
   const [userId, setUserId] = useState<TID | null>(null);
   const [userName, setUserName] = useState<string>('');
 
-  const { isLoading: usersLoad, data: users = [] } = useGetUsers();
+  // global hook with return count of fetching, there are as well useMutating
+  const countFetching = useIsFetching();
+  const { data: users = [] } = useGetUsers();
   const { data: user, refetch } = useUser(userId || 0);
+
   /* mutate vs async mutate
     with async mutet with need to by outself handle the errors, so with try, catch, finaly
     mutate make it by default
@@ -31,8 +34,6 @@ function App() {
     // analog finaly
     onSettled: () => {}
   })
-
-  if (usersLoad) return <span>loading...</span>;
 
   const handleUser = (id: TID) => {
     setUserId(id);
@@ -61,27 +62,33 @@ function App() {
       </header>
 
       <main className={styles.main}>
-        <form onSubmit={(event) => submitHandler(event)}>
-          <h3>Create user</h3>
-          <input
-            type="text"
-            placeholder='Enter user name'
-            value={userName}
-            onChange={(event) => setUserName(event.target.value)}
-          />
+        {!countFetching ? (
+          <>
+            <form onSubmit={(event) => submitHandler(event)}>
+              <h3>Create user</h3>
+                <input
+                type="text"
+                placeholder='Enter user name'
+                value={userName}
+                onChange={(event) => setUserName(event.target.value)}
+              />
 
-          <button>Create</button>
-        </form>
-        <div className={styles.wrapper}>
-          <Users users={users} onUserSelect={handleUser} />
-          {user && userId && (
-            <div>
-              <p style={{marginTop: 0}}>Selected user:</p>
-              <User user={user} />
+              <button>Create</button>
+            </form>
+            <div className={styles.wrapper}>
+              <Users users={users} onUserSelect={handleUser} />
+              {user && userId && (
+                <div>
+                  <p style={{marginTop: 0}}>Selected user:</p>
+                  <User user={user} />
+                </div>
+              )}
+              <Todos />
             </div>
-          )}
-          <Todos />
-        </div>
+          </>
+        ) : (
+          <span>Loading...</span>
+        )}
       </main>
     </section>
   );
